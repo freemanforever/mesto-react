@@ -38,35 +38,35 @@ function App() {
             />
             <Footer/>
             <PopupWithForm title="Редактировать профиль" name="profile-edit" isOpen={isEditProfilePopupOpen}
-                           onClose={closeAllPopups}>
-                <input className="popup__input popup__input_name typo typo_size_s" name="Name" value=""
+                           onClose={closeAllPopups} submitButtonText={"Сохранить"}>
+                <input className="popup__input popup__input_name typo typo_size_s" name="Name"
                        autoComplete="off"
                        required minLength="2" maxLength="40" id="profile-name" placeholder="Имя"/>
                 <span className="popup__input-error" id="profile-name-error"/>
-                <input className="popup__input popup__input_job typo typo_size_s" name="Job" value=""
-                       autoComplete="off"
+                <input className="popup__input popup__input_job typo typo_size_s" name="Job" autoComplete="off"
                        required minLength="2" maxLength="200" id="profile-job" placeholder="Занятие"/>
                 <span className="popup__input-error" id="profile-job-error"/>
             </PopupWithForm>
-            <PopupWithForm title="Новое место" name="place-add" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+            <PopupWithForm title="Новое место" name="place-add" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
+                           submitButtonText={"Создать"}>
                 <input className="popup__input popup__input_place-name typo typo_size_s" name="PlaceName"
-                       value="" placeholder="Название" autoComplete="off" required minLength="2" maxLength="30"
+                       placeholder="Название" autoComplete="off" required minLength="2" maxLength="30"
                        id="place-name"/>
                 <span className="popup__input-error" id="place-name-error"/>
-                <input className="popup__input typo typo_size_s" name="PlaceImage" value=""
-                       placeholder="Ссылка на картинку" autoComplete="off" required id="place-link"
+                <input className="popup__input typo typo_size_s" name="PlaceImage" placeholder="Ссылка на картинку"
+                       autoComplete="off" required id="place-link"
                        type="url"/>
                 <span className="popup__input-error" id="place-link-error"/>
             </PopupWithForm>
             <PopupWithForm title="Обновить аватар" name="avatar-edit" isOpen={isEditAvatarPopupOpen}
-                           onClose={closeAllPopups}>
+                           onClose={closeAllPopups} submitButtonText={"Сохранить"}>
                 <input className="popup-avatar-edit__input popup__input typo typo_size_s"
-                       name="AvatarImage" value=""
-                       placeholder="Обновить аватар(введите ссылку на картинку)" autoComplete="off" required
+                       name="AvatarImage" placeholder="Обновить аватар(введите ссылку на картинку)" autoComplete="off"
+                       required
                        id="avatar-link" type="url"/>
                 <span className="popup__input-error" id="avatar-link-error"/>
             </PopupWithForm>
-            <PopupWithForm title="Вы уверены?" name="del-confirm">
+            <PopupWithForm title="Вы уверены?" name="del-confirm" onClose={closeAllPopups}>
                 <h3 className="popup-del-confirm__caption typo typo_size_xxl">Вы уверены?</h3>
                 <button className="popup__save-button popup-del-confirm__button" type="submit">Да</button>
             </PopupWithForm>
