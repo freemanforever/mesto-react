@@ -3,10 +3,13 @@ import likeButton from "../images/likeButton.svg";
 import recycleButton from "../images/recycleButton.svg";
 
 function Card(props) {
+    function handleClick() {
+        props.onCardClick(props.card);
+    }
     return (
         <div className="place-card" key={props._id}>
             <img alt="Фото места" className="place-card__image"
-                 src={props.link}/>
+                 src={props.link} onClick={handleClick} />
             <button type="button" className="place-card__recycleButton">
                 <img src={recycleButton} alt="Корзина"
                      className="place-card__recycle-img"/>

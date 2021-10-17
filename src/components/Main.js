@@ -11,7 +11,8 @@ function Main(props) {
     const [userAvatar, setUserAvatar] = React.useState("");
     const [cards, setCards] = React.useState([]);
     const cardElements = cards.map((card) => {
-        return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}/>)
+        return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}
+                      onCardClick={props.onCardClick}/>)
     });
     React.useEffect(() => {
         api.getUserInfo()

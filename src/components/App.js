@@ -5,11 +5,11 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from "./ImagePopup";
 
-
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState();
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
@@ -23,10 +23,15 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
+    function handleCardClick(card) {
+        setSelectedCard(card);
+    }
+
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
+        setSelectedCard();
     }
 
     return (
@@ -36,6 +41,7 @@ function App() {
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
                 onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
             />
             <Footer/>
             <PopupWithForm title="Редактировать профиль" name="profile-edit" isOpen={isEditProfilePopupOpen}
@@ -71,7 +77,7 @@ function App() {
                 <h3 className="popup-del-confirm__caption typo typo_size_xxl">Вы уверены?</h3>
                 <button className="popup__save-button popup-del-confirm__button" type="submit">Да</button>
             </PopupWithForm>
-            <ImagePopup/>
+            <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
         </div>
     )
 }
