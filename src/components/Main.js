@@ -1,6 +1,7 @@
 import editButton from "../images/editButton.svg";
 import React from "react";
 import api from "../utils/Api";
+import Card from "./Card";
 
 export default Main;
 
@@ -9,6 +10,9 @@ function Main(props) {
     const [userDescription, setUserDescription] = React.useState("");
     const [userAvatar, setUserAvatar] = React.useState("");
     const [cards, setCards] = React.useState([]);
+    const cardElements = cards.map((card) => {
+        return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}/>)
+    });
     React.useEffect(() => {
         api.getUserInfo()
             .then((userData) => {
@@ -16,12 +20,12 @@ function Main(props) {
                 setUserDescription(userData.about);
                 setUserAvatar(userData.avatar);
             });
-    })
+    });
     React.useEffect(() => {
         api.getInitialCards()
             .then((cardsData) => {
                 setCards(cardsData);
-            })
+            });
     }, []);
     return (
         <main className="content">
@@ -45,9 +49,7 @@ function Main(props) {
                         onClick={props.onAddPlace}>
                 </button>
             </section>
-
-            <section className="places section-pos"/>
-
+            <section className="places section-pos">{cardElements}</section>
         </main>
     )
 }
