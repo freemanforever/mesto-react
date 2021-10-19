@@ -19,7 +19,7 @@ function Card(props) {
                 <button type="button" className="place-card__like-button">
                     <img className="place-card__like-img" src={likeButton}
                          alt="кнопка 'Мне нравится!'"/>
-                    <p className="place-card__like-count typo_size_xs">{props.likes.length}</p>
+                    <h3 className="place-card__like-count typo_size_xs">{props.likes.length}</h3>
                 </button>
             </div>
         </div>

@@ -75,7 +75,7 @@ function App() {
             </PopupWithForm>
             <PopupWithForm title="Вы уверены?" name="del-confirm" onClose={closeAllPopups}>
                 <h3 className="popup-del-confirm__caption typo typo_size_xxl">Вы уверены?</h3>
-                <button className="popup__save-button popup-del-confirm__button" type="submit">Да</button>
+                <button className="popup__save-button popup-del-confirm__button" type="submit"></button>
             </PopupWithForm>
             <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
         </div>

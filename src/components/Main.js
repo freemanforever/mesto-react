@@ -20,13 +20,15 @@ function Main(props) {
                 setUserName(userData.name);
                 setUserDescription(userData.about);
                 setUserAvatar(userData.avatar);
-            });
-    });
+            })
+            .catch((err) => console.log(`Что-то пошло не так с данными пользователя...` + err));
+    }, []);
     React.useEffect(() => {
         api.getInitialCards()
             .then((cardsData) => {
                 setCards(cardsData);
-            });
+            })
+            .catch((err) => console.log(`Что-то пошло не так с начальными карточками...` + err));
     }, []);
     return (
         <main className="content">
