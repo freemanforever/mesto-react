@@ -2,27 +2,18 @@ import editButton from "../images/editButton.svg";
 import React from "react";
 import api from "../utils/Api";
 import Card from "./Card";
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 export default Main;
 
 function Main(props) {
-    const [userName, setUserName] = React.useState("");
-    const [userDescription, setUserDescription] = React.useState("");
-    const [userAvatar, setUserAvatar] = React.useState("");
+    const currentUser = React.useContext(CurrentUserContext);
     const [cards, setCards] = React.useState([]);
     const cardElements = cards.map((card) => {
         return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}
                       onCardClick={props.onCardClick}/>)
     });
-    React.useEffect(() => {
-        api.getUserInfo()
-            .then((userData) => {
-                setUserName(userData.name);
-                setUserDescription(userData.about);
-                setUserAvatar(userData.avatar);
-            })
-            .catch((err) => console.log(`Что-то пошло не так с данными пользователя...` + err));
-    }, []);
+
     React.useEffect(() => {
         api.getInitialCards()
             .then((cardsData) => {
@@ -30,23 +21,24 @@ function Main(props) {
             })
             .catch((err) => console.log(`Что-то пошло не так с начальными карточками...` + err));
     }, []);
+
     return (
         <main className="content">
             <section className="profile section-pos">
                 <div className="profile__avatar-container">
-                    <img src={userAvatar} alt="Аватар пользователя"
+                    <img src={currentUser.avatar} alt="Аватар пользователя"
                          className="profile__avatar-image"/>
                     <button type="button" className="profile__avatar-edit-button" onClick={props.onEditAvatar}/>
                 </div>
                 <div className="profile__info">
                     <div className="profile__card">
-                        <h1 className="profile__name typo typo_size_xl hide-text-overflow">{userName}</h1>
+                        <h1 className="profile__name typo typo_size_xl hide-text-overflow">{currentUser.name}</h1>
                         <button type="button" className="profile__edit-button" onClick={props.onEditProfile}>
                             <img className="profile__edit-button-img" src={editButton}
                                  alt="кнопка редактирования профиля"/>
                         </button>
                     </div>
-                    <h2 className="profile__job typo typo_size_l hide-text-overflow">{userDescription}</h2>
+                    <h2 className="profile__job typo typo_size_l hide-text-overflow">{currentUser.about}</h2>
                 </div>
                 <button type="button" className="profile__add-button profile__add-button_pos-main"
                         onClick={props.onAddPlace}>
