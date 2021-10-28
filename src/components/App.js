@@ -3,7 +3,8 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import EditProfilePopup from "./EditProfilePopup";
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -37,6 +38,15 @@ function App() {
 
     function handleCardClick(card) {
         setSelectedCard(card);
+    }
+
+    function handleUpdateAvatar({avatar}) {
+        api.setAvatar({avatar})
+            .then((userData) => {
+                setCurrentUser(userData);
+                closeAllPopups();
+            })
+            .catch((err) => console.log(`Что-то пошло не так с аватаром пользователя...` + err));
     }
 
     function handleUpdateUser({name, about}) {
@@ -80,15 +90,8 @@ function App() {
                            type="url"/>
                     <span className="popup__input-error" id="place-link-error"/>
                 </PopupWithForm>
-                <PopupWithForm title="Обновить аватар" name="avatar-edit" isOpen={isEditAvatarPopupOpen}
-                               onClose={closeAllPopups} submitButtonText={"Сохранить"}>
-                    <input className="popup-avatar-edit__input popup__input typo typo_size_s"
-                           name="AvatarImage" placeholder="Обновить аватар(введите ссылку на картинку)"
-                           autoComplete="off"
-                           required
-                           id="avatar-link" type="url"/>
-                    <span className="popup__input-error" id="avatar-link-error"/>
-                </PopupWithForm>
+                <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
+                                 onUpdateAvatar={handleUpdateAvatar}/>
                 <PopupWithForm title="Вы уверены?" name="del-confirm" onClose={closeAllPopups}>
                     <h3 className="popup-del-confirm__caption typo typo_size_xxl">Вы уверены?</h3>
                     <button className="popup__save-button popup-del-confirm__button" type="submit"></button>

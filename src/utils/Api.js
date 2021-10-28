@@ -69,26 +69,15 @@ class Api {
             .then(this.returnResultStatus)
     }
 
-    addLike(cardId) {
+    addLike(cardId, isLiked) {
         return fetch(
             this._baseUrl + `/cards/likes/${cardId}`,
             {
-                method: 'PUT',
+                method: isLiked ? 'PUT' : 'DELETE',
                 headers: this._headers
             }
         )
             .then(this.returnResultStatus)
-    }
-
-    delLike(cardId) {
-        return fetch(
-            this._baseUrl + `/cards/likes/${cardId}`,
-            {
-                method: 'DELETE',
-                headers: this._headers
-            }
-        )
-            .then(this.returnResultStatus);
     }
 
     setAvatar({avatar}) {
