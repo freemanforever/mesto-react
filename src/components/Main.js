@@ -1,39 +1,11 @@
 import editButton from "../images/editButton.svg";
 import React from "react";
-import api from "../utils/Api";
-import Card from "./Card";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 export default Main;
 
 function Main(props) {
     const currentUser = React.useContext(CurrentUserContext);
-    const [cards, setCards] = React.useState([]);
-    const cardElements = cards.map((card) => {
-        return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}
-                      onCardClick={props.onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>)
-    });
-
-    function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-        api.addLike(card._id, !isLiked).then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        });
-    }
-
-    function handleCardDelete(card) {
-        api.delCard(card._id).then(() => {
-            setCards((state) => state.filter((c) => c._id !== card._id))
-        })
-    }
-
-    React.useEffect(() => {
-        api.getInitialCards()
-            .then((cardsData) => {
-                setCards(cardsData);
-            })
-            .catch((err) => console.log(`Что-то пошло не так с начальными карточками...` + err));
-    }, []);
 
     return (
         <main className="content">
@@ -57,7 +29,7 @@ function Main(props) {
                         onClick={props.onAddPlace}>
                 </button>
             </section>
-            <section className="places section-pos">{cardElements}</section>
+            <section className="places section-pos">{props.cards}</section>
         </main>
     )
 }
