@@ -1,7 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
-
 function AddPlacePopup(props) {
     const placeNameRef = React.useRef('');
     const placeLinkRef = React.useRef('');

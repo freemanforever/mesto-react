@@ -1,12 +1,16 @@
 import editButton from "../images/editButton.svg";
 import React from "react";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import Card from "./Card";
 
 export default Main;
 
-function Main(props) {
+function Main({cards,...props}) {
     const currentUser = React.useContext(CurrentUserContext);
-
+    const cardElements = cards.map((card) => {
+        return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}
+                      onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete}/>)
+    });
     return (
         <main className="content">
             <section className="profile section-pos">
@@ -29,7 +33,7 @@ function Main(props) {
                         onClick={props.onAddPlace}>
                 </button>
             </section>
-            <section className="places section-pos">{props.cards}</section>
+            <section className="places section-pos">{cardElements}</section>
         </main>
     )
 }

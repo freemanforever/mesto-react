@@ -8,19 +8,14 @@ import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import Card from "./Card";
 import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
     const [cards, setCards] = React.useState([]);
-    const cardElements = cards.map((card) => {
-        return (<Card key={card._id} card={card} link={card.link} name={card.name} likes={card.likes}
-                      onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>)
-    });
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState();
+    const [selectedCard, setSelectedCard] = React.useState(null);
     const [currentUser, setCurrentUser] = React.useState({});
 
     React.useEffect(() => {
@@ -110,7 +105,7 @@ function App() {
                     onAddPlace={handleAddPlaceClick}
                     onEditAvatar={handleEditAvatarClick}
                     onCardClick={handleCardClick}
-                    cards={cardElements}
+                    cards={cards}
                     onCardLike={handleCardLike}
                     onCardDelete={handleCardDelete}
                 />
