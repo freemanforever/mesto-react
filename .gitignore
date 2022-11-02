@@ -4,13 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
+/mesto-react.git
 
 # testing
 /coverage
 
 # production
 /build
-/mesto-react.git
 
 # misc
 .DS_Store
