@@ -1,3 +1,4 @@
+import React from "react";
 import closeButton from "../images/closeButton.svg";
 
 function ImagePopup(props) {
